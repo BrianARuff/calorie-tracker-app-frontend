@@ -6,11 +6,15 @@ import ErrorBoundary from "./Error/ErrorBoundary";
 function App() {
   return (
     <div className="App">
-      <ErrorBoundary>
-        <Navigation />
-      </ErrorBoundary>
+      <Navigation />
     </div>
   );
 }
 
-export default App;
+export default function AppWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <App {...props} />
+    </ErrorBoundary>
+  );
+}

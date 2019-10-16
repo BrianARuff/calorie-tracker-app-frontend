@@ -2,8 +2,9 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Chart from "react-apexcharts";
 import { css } from "emotion";
+import ErrorBoundary from "../Error/ErrorBoundary";
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     hasError: false,
     errorMessage: "",
@@ -127,4 +128,12 @@ export default class Home extends Component {
       </Fragment>
     );
   }
+}
+
+export default function HomeWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Home {...props} />
+    </ErrorBoundary>
+  );
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ErrorBoundary from "../Error/ErrorBoundary";
 
-export default class Auth extends Component {
+class Auth extends Component {
   state = {
     hasError: false,
     error: {}
@@ -40,4 +41,12 @@ export default class Auth extends Component {
       </div>
     );
   }
+}
+
+export default function AuthWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Auth {...props} />
+    </ErrorBoundary>
+  );
 }

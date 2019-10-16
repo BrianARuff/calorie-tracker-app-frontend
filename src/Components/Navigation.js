@@ -5,15 +5,15 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import ErrorBoundary from "../Error/ErrorBoundary.js";
 import Home from "../Pages/Home";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import Auth from "../Pages/Auth";
-import ErrorBoundary from "../Error/ErrorBoundary";
 import PageNotFound from "../Pages/PageNotFound";
 import { css } from "emotion";
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   render() {
     return (
       <Router>
@@ -57,49 +57,21 @@ export default class Navigation extends Component {
           </div>
         </div>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <ErrorBoundary>
-                <Home {...props} />
-              </ErrorBoundary>
-            )}
-          />
-          <Route
-            path="/register"
-            render={props => (
-              <ErrorBoundary>
-                <Register {...props} />
-              </ErrorBoundary>
-            )}
-          />
-          <Route
-            path="/login"
-            render={props => (
-              <ErrorBoundary>
-                <Login {...props} />
-              </ErrorBoundary>
-            )}
-          />
-          <Route
-            path="/auth/:username"
-            render={props => (
-              <ErrorBoundary>
-                <Auth {...props} />
-              </ErrorBoundary>
-            )}
-          />
-          <Route
-            path="/*"
-            render={props => (
-              <ErrorBoundary>
-                <PageNotFound {...props} />
-              </ErrorBoundary>
-            )}
-          />
+          <Route exact path="/" render={props => <Home {...props} />} />
+          <Route path="/register" render={props => <Register {...props} />} />
+          <Route path="/login" render={props => <Login {...props} />} />
+          <Route path="/auth/:username" render={props => <Auth {...props} />} />
+          <Route path="/*" render={props => <PageNotFound {...props} />} />
         </Switch>
       </Router>
     );
   }
+}
+
+export default function NavigationWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Navigation {...props} />
+    </ErrorBoundary>
+  );
 }

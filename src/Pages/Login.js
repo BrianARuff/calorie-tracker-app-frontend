@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { css, keyframes } from "emotion";
+import ErrorBoundary from "../Error/ErrorBoundary";
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     errorMessage: "",
     hasError: false,
@@ -106,3 +107,11 @@ const fadeIn = keyframes({
     opacity: 100
   }
 });
+
+export default function LoginWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Login {...props} />
+    </ErrorBoundary>
+  );
+}

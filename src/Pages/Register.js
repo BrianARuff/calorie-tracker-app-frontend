@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+import ErrorBoundary from "../Error/ErrorBoundary";
 
-export default class Register extends Component {
+class Register extends Component {
   state = {
     username: "",
     password: "",
@@ -187,3 +188,11 @@ export default class Register extends Component {
 const emptyFieldStyle = {
   border: "1px solid red"
 };
+
+export default function RegisterWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Register {...props} />
+    </ErrorBoundary>
+  );
+}
