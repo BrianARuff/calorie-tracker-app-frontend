@@ -8,6 +8,7 @@ import {
 import Home from "../Pages/Home";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
+import Auth from "../Pages/Auth";
 
 export default class Navigation extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class Navigation extends Component {
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route path="/register" render={props => <Register {...props} />} />
           <Route path="/login" render={props => <Login {...props} />} />
+          <Route path="/auth/:username" render={props => <Auth {...props} />} />
         </Switch>
       </Router>
     );

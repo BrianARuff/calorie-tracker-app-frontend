@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+// import { styled } from "@emotion/styled";
 
 export default class Register extends Component {
   state = {
@@ -12,7 +13,8 @@ export default class Register extends Component {
     current_weight: "",
     goal_weight: "",
     hasError: false,
-    errorMessage: ""
+    errorMessage: "",
+    showEmail: false
   };
 
   handleInput = e => {
@@ -32,7 +34,9 @@ export default class Register extends Component {
         current_weight: this.state.starting_weight,
         goal_weight: this.state.goal_weight
       })
-      .then(res => {})
+      .then(res => {
+        this.setState({ showEmail: true });
+      })
       .catch(err => {
         this.setState({
           hasError: true,
@@ -95,6 +99,9 @@ export default class Register extends Component {
           </div>
           <button onClick={this.register}>Submit</button>
         </form>
+        {this.state.showEmail ? (
+          <p>Please check your email to continue.</p>
+        ) : null}
       </Fragment>
     );
   }

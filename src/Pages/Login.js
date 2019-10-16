@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 export default class Login extends Component {
+  componentDidMount() {}
   render() {
     return (
       <Fragment>
