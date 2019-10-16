@@ -9,6 +9,8 @@ import Home from "../Pages/Home";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import Auth from "../Pages/Auth";
+import ErrorBoundary from "../Error/ErrorBoundary";
+import PageNotFound from "../Pages/PageNotFound";
 
 export default class Navigation extends Component {
   render() {
@@ -20,10 +22,47 @@ export default class Navigation extends Component {
           <NavLink to="/login">Login</NavLink>
         </div>
         <Switch>
-          <Route exact path="/" render={props => <Home {...props} />} />
-          <Route path="/register" render={props => <Register {...props} />} />
-          <Route path="/login" render={props => <Login {...props} />} />
-          <Route path="/auth/:username" render={props => <Auth {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <ErrorBoundary>
+                <Home {...props} />
+              </ErrorBoundary>
+            )}
+          />
+          <Route
+            path="/register"
+            render={props => (
+              <ErrorBoundary>
+                <Register {...props} />
+              </ErrorBoundary>
+            )}
+          />
+          <Route
+            path="/login"
+            render={props => (
+              <ErrorBoundary>
+                <Login {...props} />
+              </ErrorBoundary>
+            )}
+          />
+          <Route
+            path="/auth/:username"
+            render={props => (
+              <ErrorBoundary>
+                <Auth {...props} />
+              </ErrorBoundary>
+            )}
+          />
+          <Route
+            path="/*"
+            render={props => (
+              <ErrorBoundary>
+                <PageNotFound {...props} />
+              </ErrorBoundary>
+            )}
+          />
         </Switch>
       </Router>
     );

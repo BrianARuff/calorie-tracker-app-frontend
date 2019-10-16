@@ -14,7 +14,8 @@ export default class Register extends Component {
     goal_weight: "",
     hasError: false,
     errorMessage: "",
-    showEmail: false
+    showEmail: false,
+    count: 0
   };
 
   handleInput = e => {
@@ -35,12 +36,19 @@ export default class Register extends Component {
         goal_weight: this.state.goal_weight
       })
       .then(res => {
-        this.setState({ showEmail: true });
+        this.setState(prevState => {
+          return { showEmail: true, count: prevState.count++ };
+        });
       })
       .catch(err => {
-        this.setState({
-          hasError: true,
-          errorMessage: err.response.data.message
+        this.setState(prevState => {
+          return {
+            hasError: true,
+            errorMessage: Object(err.response).hasOwnProperty("data")
+              ? err.response.data.message
+              : "",
+            count: prevState.count++
+          };
         });
       });
   };
@@ -56,12 +64,26 @@ export default class Register extends Component {
         <form onSubmit={this.register} className="regiter-container">
           <div className="group">
             <label htmlFor="username">Username</label>
-            <input onChange={this.handleInput} name="username" type="text" />
+            <input
+              style={
+                this.state.count > 0 && !this.state.username.length
+                  ? emptyFieldStyle
+                  : {}
+              }
+              onChange={this.handleInput}
+              name="username"
+              type="text"
+            />
           </div>
 
           <div className="group">
             <label htmlFor="password">Password</label>
             <input
+              style={
+                this.state.count > 0 && !this.state.password.length
+                  ? emptyFieldStyle
+                  : {}
+              }
               autoComplete="true"
               onChange={this.handleInput}
               name="password"
@@ -71,22 +93,52 @@ export default class Register extends Component {
 
           <div className="group">
             <label htmlFor="email">Email</label>
-            <input onChange={this.handleInput} name="email" type="email" />
+            <input
+              style={
+                this.state.count > 0 && !this.state.email.length
+                  ? emptyFieldStyle
+                  : {}
+              }
+              onChange={this.handleInput}
+              name="email"
+              type="email"
+            />
           </div>
 
           <div className="group">
             <label htmlFor="age">Age</label>
-            <input onChange={this.handleInput} name="age" type="text" />
+            <input
+              style={
+                this.state.count > 0 && !this.state.age ? emptyFieldStyle : {}
+              }
+              onChange={this.handleInput}
+              name="age"
+              type="text"
+            />
           </div>
 
           <div className="group">
-            <label htmlFor="height">Height</label>
-            <input onChange={this.handleInput} name="height" type="text" />
+            <label htmlFor="height">Height in Inches</label>
+            <input
+              style={
+                this.state.count > 0 && !this.state.height
+                  ? emptyFieldStyle
+                  : {}
+              }
+              onChange={this.handleInput}
+              name="height"
+              type="text"
+            />
           </div>
 
           <div className="group">
             <label htmlFor="starting_weight">Starting Weight</label>
             <input
+              style={
+                this.state.count > 0 && !this.state.starting_weight
+                  ? emptyFieldStyle
+                  : {}
+              }
               onChange={this.handleInput}
               name="starting_weight"
               type="text"
@@ -95,7 +147,16 @@ export default class Register extends Component {
 
           <div className="group">
             <label htmlFor="goal_weight">Goal Weight</label>
-            <input onChange={this.handleInput} name="goal_weight" type="text" />
+            <input
+              style={
+                this.state.count > 0 && !this.state.goal_weight
+                  ? emptyFieldStyle
+                  : {}
+              }
+              onChange={this.handleInput}
+              name="goal_weight"
+              type="text"
+            />
           </div>
           <button onClick={this.register}>Submit</button>
         </form>
@@ -106,3 +167,7 @@ export default class Register extends Component {
     );
   }
 }
+
+const emptyFieldStyle = {
+  border: "1px solid red"
+};

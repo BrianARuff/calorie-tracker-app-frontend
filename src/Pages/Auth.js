@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-export default class Auth extends React.Component {
+export default class Auth extends Component {
   state = {
     hasError: false,
     error: {}
@@ -14,7 +14,9 @@ export default class Auth extends React.Component {
       })
       .then(res => {
         setTimeout(() => {
-          this.props.history.push("/login");
+          this.props.history.push("/login", {
+            username: this.props.match.params.username
+          });
         }, 3000);
       })
       .catch(err => {

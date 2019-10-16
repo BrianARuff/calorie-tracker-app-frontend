@@ -21,3 +21,7 @@ code {
 .navLinks a {
   margin: 0 1.6rem;
 }
+
+.fw-light {
+  font-weight: 300;
+}
