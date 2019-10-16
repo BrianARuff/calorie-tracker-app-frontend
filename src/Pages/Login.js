@@ -29,6 +29,7 @@ export default class Login extends Component {
         localStorage.setItem("starting_weight", res.data.starting_weight);
         localStorage.setItem("current_weight", res.data.current_weight);
         localStorage.setItem("goal_weight", res.data.goal_weight);
+        this.props.history.push("/");
       })
       .catch(err => {
         this.setState({

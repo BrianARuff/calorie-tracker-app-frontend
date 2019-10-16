@@ -20,8 +20,13 @@ code {
 
 .navLinks a {
   margin: 0 1.6rem;
+  text-decoration: none;
 }
 
 .fw-light {
-  font-weight: 300;
+  font-weight: lighter;
+}
+
+.fw-bold {
+  font-weight: bold;
 }

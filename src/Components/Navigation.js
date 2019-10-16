@@ -11,15 +11,50 @@ import Login from "../Pages/Login";
 import Auth from "../Pages/Auth";
 import ErrorBoundary from "../Error/ErrorBoundary";
 import PageNotFound from "../Pages/PageNotFound";
+import { css } from "emotion";
 
 export default class Navigation extends Component {
   render() {
     return (
       <Router>
-        <div className="navLinks">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/register">Register </NavLink>
-          <NavLink to="/login">Login</NavLink>
+        <div
+          className={css`
+            background: #ff4900;
+            padding: 20px 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          `}
+        >
+          <div className="navLinks">
+            <NavLink
+              className={css`
+                color: #fff;
+              `}
+              activeClassName="fw-bold"
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className={css`
+                color: #fff;
+              `}
+              activeClassName="fw-bold"
+              to="/register"
+            >
+              Register{" "}
+            </NavLink>
+            <NavLink
+              className={css`
+                color: #fff;
+              `}
+              activeClassName="fw-bold"
+              to="/login"
+            >
+              Login
+            </NavLink>
+          </div>
         </div>
         <Switch>
           <Route

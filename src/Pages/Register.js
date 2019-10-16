@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-// import { styled } from "@emotion/styled";
 
 export default class Register extends Component {
   state = {
     username: "",
     password: "",
+    password2: "",
     email: "",
     age: "",
     height: "",
@@ -24,33 +24,35 @@ export default class Register extends Component {
 
   register = e => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/auth/register", {
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email,
-        age: this.state.age,
-        height: this.state.height,
-        starting_weight: this.state.starting_weight,
-        current_weight: this.state.starting_weight,
-        goal_weight: this.state.goal_weight
-      })
-      .then(res => {
-        this.setState(prevState => {
-          return { showEmail: true, count: prevState.count++ };
+    if (this.state.password === this.state.password2) {
+      axios
+        .post("http://localhost:3001/auth/register", {
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email,
+          age: this.state.age,
+          height: this.state.height,
+          starting_weight: this.state.starting_weight,
+          current_weight: this.state.starting_weight,
+          goal_weight: this.state.goal_weight
+        })
+        .then(res => {
+          this.setState(prevState => {
+            return { showEmail: true, count: prevState.count++ };
+          });
+        })
+        .catch(err => {
+          this.setState(prevState => {
+            return {
+              hasError: true,
+              errorMessage: Object(err.response).hasOwnProperty("data")
+                ? err.response.data.message
+                : "",
+              count: prevState.count++
+            };
+          });
         });
-      })
-      .catch(err => {
-        this.setState(prevState => {
-          return {
-            hasError: true,
-            errorMessage: Object(err.response).hasOwnProperty("data")
-              ? err.response.data.message
-              : "",
-            count: prevState.count++
-          };
-        });
-      });
+    }
   };
 
   render() {
@@ -76,6 +78,10 @@ export default class Register extends Component {
             />
           </div>
 
+          {this.state.password === this.state.password2 ? null : (
+            <span>Passwords Do Not Match</span>
+          )}
+
           <div className="group">
             <label htmlFor="password">Password</label>
             <input
@@ -87,6 +93,16 @@ export default class Register extends Component {
               autoComplete="true"
               onChange={this.handleInput}
               name="password"
+              type="password"
+            />
+          </div>
+
+          <div className="group">
+            <label htmlFor="password2">Validate Password</label>
+            <input
+              autoComplete="false"
+              onChange={this.handleInput}
+              name="password2"
               type="password"
             />
           </div>
