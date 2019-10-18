@@ -27,7 +27,7 @@ class Register extends Component {
     e.preventDefault();
     if (this.state.password === this.state.password2) {
       axios
-        .post("http://localhost:3001/auth/register", {
+        .post(process.env.REACT_APP_NODE_LOCALHOST + "/auth/register", {
           username: this.state.username,
           password: this.state.password,
           email: this.state.email,

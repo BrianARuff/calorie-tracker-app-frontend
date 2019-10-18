@@ -58,9 +58,17 @@ class Navigation extends Component {
         </div>
         <Switch>
           <Route exact path="/" render={props => <Home {...props} />} />
-          <Route path="/register" render={props => <Register {...props} />} />
-          <Route path="/login" render={props => <Login {...props} />} />
-          <Route path="/auth/:username" render={props => <Auth {...props} />} />
+          <Route
+            exact
+            path="/register"
+            render={props => <Register {...props} />}
+          />
+          <Route exact path="/login" render={props => <Login {...props} />} />
+          <Route
+            exact
+            path="/auth/:username"
+            render={props => <Auth {...props} />}
+          />
           <Route path="/*" render={props => <PageNotFound {...props} />} />
         </Switch>
       </Router>

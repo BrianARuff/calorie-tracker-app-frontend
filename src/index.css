@@ -30,3 +30,7 @@ code {
 .fw-bold {
   font-weight: bold;
 }
+
+.error-color {
+  color: rgb(200, 69, 69);
+}

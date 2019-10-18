@@ -20,7 +20,9 @@ class Login extends Component {
   login = e => {
     e.preventDefault();
     axios
-      .get(`http://localhost:3001/users/name/${this.state.username}`)
+      .get(
+        `${process.env.REACT_APP_NODE_LOCALHOST}/users/name/${this.state.username}`
+      )
       .then(res => {
         console.log(res.data);
         localStorage.setItem("id", res.data.id);

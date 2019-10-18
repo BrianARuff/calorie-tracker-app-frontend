@@ -10,7 +10,7 @@ class Auth extends Component {
   componentDidMount() {
     console.log(this.props.match.params.username);
     axios
-      .post(`http://localhost:3001/auth/validate`, {
+      .post(`${process.env.REACT_APP_NODE_LOCALHOST}/auth/validate`, {
         username: this.props.match.params.username
       })
       .then(res => {

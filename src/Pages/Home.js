@@ -27,7 +27,7 @@ class Home extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:3001/users?limit=20&offset=0")
+      .get(`${process.env.REACT_APP_NODE_LOCALHOST}/users?limit=20&offset=0`)
       .then(res => {
         console.log(res.data);
 
